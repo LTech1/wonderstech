@@ -1,0 +1,262 @@
+ch  APRIL 20.2021:
+      MY PERSONAL NOTE 
+      IQ
+which AWS  services have used in your project:
+
+Most companies host thier servers in AWS 
+aws storage :
+  EBS this is used to mount our root file system
+  S3  
+  EFS
+AMI = OPERATING SYSTEM 
+DATA MUST BE MOUNT ON EC2.
+the AMI/OPS  needs to be triggered to start. 
+
+we also need volume becuase we want  to store our data. 
+EBS:  used to mount our root file system. 
+we are working in a distributed work places. 
+
+NFS or EFS : 
+
+
+Object storate :
+  s3 : simple storage . perfect place to store videos, pdfs, files. 
+  use cases:
+    when we configred k8s cluster we used s3 as our value store. 
+
+    S3 VERSIONING:
+      when u have contents in s3 bucket we can use versioning to track. 
+      it can be secured using bucket policy 
+      and we can deny  public acces depending on the contents. 
+      data lost is not possible with s3 buckets. 
+
+      we use s3 buckets to store sensitive encripted files. and manage its content access to the public 
+      Teraform would also help us to  manage our infrasture. 
+
+      s3 bucket with terraform:
+        when you create infrasture the file is local to s3 bucket would have terraform state files.
+        s3 faciliate collaboration with project. 
+      s3 buckets are globally unique. and is an amazon 
+
+      s3 bucket have storage class.
+      types include
+      standard   - users can access the files at anytime.
+      In frequent access. 
+
+      s3 bucket is a big deal. 
+      we need to know when to move the data from standard to infrequent class. 
+      Galacier starage - this is used to store archieval data in glacier. 
+
+      REPLCITIONS OF S3 BUCKETS:
+        create the same 
+
+        s3 buckets are region specfic with globally unique names. 
+        making contents available accross different az. 
+
+        Cross Region Replication. 
+
+        we can replicate s3 buckets within the same region or across regions. 
+        versioning must be enabled so we can achieve s3 replication. 
+
+        arn = amazon resource name . 
+
+        S3 BUCKET POLICY:
+          this is set of rules that defines :
+            who can access our buckets 
+            whether everyone can read/write 
+            we would access 
+            we can define the ip from which they can acces the bucket. 
+        I have crreated s3 policy using jason format. 
+        we can use GUI, CLI, API, SDK  to updload and retreive data.
+        we can also use API to create volumes in our AWS  account 
+        API : Application Programming Interface . 
+        we can use ApI to create, manage and destroy resources in aws.
+         Please note: 
+
+          Object Reliability, Performace and cost is based on stoarage class. 
+           IQ: 
+
+            what is the maxium file size that be uploaded in an s3 bucket . 
+            5TB = 5000GB:
+              WE CAN CREATE UPTO 100 BUCKETS  IN ONE AWS ACCOUNT:
+        AWS SNOWBALL FAMILY:
+        
+        most companies use this to store data and send back to aws to upload it to thier s3 account. 
+
+{
+  "Version": "2012-10-17",
+  "Id": "S3PolicyId1",
+  "Statement": [
+    {
+      "Sid": "IPAllow",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::masterclass22r/*",
+      "Condition": {
+         "IpAddress": {"aws:SourceIp": "103.5.132.67"},
+         "NotIpAddress": {"aws:SourceIp": "54.240.143.188/32"} 
+      } 
+    } 
+  ]
+}
+
+AWS ELB AND AUTO SCALING GROUP:
+
+How can we ensure scale our infrasture in aws:
+
+Loadbalancer helps to route our traffic to the end targets. 
+It also manages the routing for us . 
+Targets could include:
+    IP ADDRESSES
+    S3 BUCKETS
+    CONTAINERS 
+    EC2 INSTANCES.
+when endusers type app.com.
+
+roundrobin 
+;
+loud
+
+catergories of Loadbalancer:
+
+  nginx 
+  haproxy
+  Elastic Loadbalancer:
+Load balancer roud traffics to ec2 targets. 
+most of the time we have back end servers too. 
+
+app.com would qury global dns. 
+tools:
+  nslookup
+  once the dns server is querried , its gonna look for the server mapped to app.com.
+  A records .
+  Loadbalancer is linked to app.com 
+  ELASTIC Loadbalancer: MANAGED LOAD balancer SERVICES  provided by aws . 
+  Loadbalancer received and route the traffics to the backend servers . 
+
+  Network Loadbalancer
+  Application Loadbalancer:
+
+
+    OCI MODEL:
+      Layer 7 support. 
+      osi : open system interconnection model.
+
+      layer 4: lb received and routes the traffic to the required layer.
+       traffic is received and routed to multiple destintations.
+       Inginx ingres is a layer7 Loadbalancer.
+
+       In k8s we have an extra layer of security that comes through nginx. 
+       app.com
+        NLB = Network loadbalancer.
+        in a microservice context NLB IS  not advisable/recommended.
+        NLB : would route traffic to multiple ragets if the all the target are running the same application. 
+        h
+  experience with layer7
+NLB : route traffic to one application on one server or multiple server. 
+ALB:  supports : https and http. 
+It allows request to trafics to route to multiple application using one load balancer. 
+It needs a listener 
+
+ALB:
+  we need to define the port the load balancer would listen to. 
+
+  DEMO :
+
+Install group oif 
+
+Launch 2 redhat servers
+1 ubtuntu server
+
+once in your tomcat server.
+
+java -jar spring-boot-mongo-1.0.jar to start the applocation.
+
+
+nohup 
+java -jar spring-boot-mongo-1.0.jar:
+ to start the applicaion (to start the application)
+
+sudo chmod 777 -R /opt/tomcat9
+
+Demo:
+
+
+ scp -i k23a.pem java-web-app.war ec2-user@3.18.107.160:/opt/tomcat9/webapps/ (runs in the tomcat server)
+
+scp -i k23.pem java-web-app.war ec2-user@18.216.204.62:/opt/tomcat9/webapps/  (java web app)
+
+scp -i k23.pem maven-web-app.war ec2-user@3.16.216.167:/opt/tomcat9/webapps/   (maven webapp)
+
+ scp -i k23a.pem spring-boot-mongo-1.0.jar ec2-user@3.16.56.126:/opt/ (youi need only java, standalone application)
+              files/directory transfer between servers:
+
+                
+ scp -r -i  mykey.pem bmoapp/    ubuntu@172.31.13.225:/home/ubuntu/danny
+        
+    sending  
+    receiving server :   private , destination          
+
+Creating a target group
+
+add target 
+select the right protocol
+edit taget
+java-web-app
+springapp
+sringappdocker 
+mavenapptgr
+
+
+Loadbalancer:
+  internal 
+  internet./ingress = 7 layer.
+
+  host or pathbased routing. 
+  targetet groups. 
+
+  .............................
+  ALB RULES:
+    /java* forward to [targetgroup]
+
+    sticky bit session 
+
+    stickysession  when not enabled --- customers would 
+    when stickiness is disabled -- clients wont be able to stay logged into thier account. 
+    roundrobin: is an algorithm used to route traffic... 
+
+
+    Deploying applications that are :
+      highly available 
+      resilient 
+      scalable 
+      Elastic  
+            secured. 
+
+  Creating an Alias for our Loadbalancer using Route53:
+    1. create A record using the loadbalancer. 
+    ALB : allows for multiple services to be hosted behind a single Loadbalancer:
+      Request is distributed evenly accross different availabibilty zones. 
+
+
+      ...................................
+       scp -i April21.pem java-web-app.war ec2-user@54.241.85.32:/opt/tomcat9/webapps/
+                  
+      scp -i April21.pem java-web-app.war ec2-user@13.56.13.208:/opt/tomcat9/webapps/
+
+       scp -i April21.pem maven-web-app.war ec2-user@54.193.57.38:/opt/tomcat9/webapps/scp -i k23a.pem spring-boot-mongo-1.0.jar ec2-user@54.183.229.249
+:/opt/
+
+  scp -i April21.pem spring-boot-mongo-1.0.jar ec2-user@54.183.229.249:/opt/
+
+Now that our applications are running, we can then configure our loadbalancer using the application
+
+ 
+
+
+54.183.229.249
+
+54.193.57.38
+
+Education.docx

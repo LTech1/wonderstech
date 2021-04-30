@@ -1,0 +1,58 @@
+node exposters gather data together for promethuesto collect it for further processing
+
+kubestate metrics.
+data collection to avoid problems that could occur. 
+promethuesto got a web server 
+promethues also have a time series databases 
+ promethues needs a peace of storage within the cluster. 
+  so data can persist. 
+
+........................................
+Elastic search, logstach and  Kebana
+helm is a package manager for kubernates:
+  we can use helm to manage thirdparty application. 
+  ELF STACK 
+  ........................
+  devops enginer are incharge of production. 
+  helm configure production grate monitoring tools 
+  monitoring is very important. 
+
+  application and system logs:
+    helps us understand what is happening within our cluster. 
+    logs are used to debung and monitoring cluster service. 
+    .................................
+    managing complex 
+  microservice monitoring can be very complex. 
+
+  Elastic stack can be used along with docker. 
+  Elastic stack is an open source application. 
+  search analyse and visualize the data in real time. 
+
+  Elastic search is used to analyse data .  the data comes in a jason format. 
+
+  kebana is designed to work with elastic search. 
+  kebana is used to visualize and analyse data stored in elastic search. 
+  beats: beats are generally data shippers. 
+  beats is a software that would collect and ship data. 
+  we would install beat in our k8s cluster. 
+
+  file 
+  metricbeat:
+  packagebeat:
+  heartbeat: is used to monitor the up time performance for our application, server, pod. 
+  we would focus on filebeat:
+    elastic search also does processing. 
+Filebeat : collects data and ship it to logstash.
+all the nodes in the cluster would generate data. 
+logs would be generated from pods 
+........................................................
+configuring k8s cluster using kops. 
+
+.......................
+to see lines in files
+:se nu
+
+stateful search : eleasticsearch is deployed as a statefulset
+
+loadbalancer: 
+  

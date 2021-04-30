@@ -1,0 +1,198 @@
+April 19 2021:
+  .....................................
+  Our progress: 
+    Saturday class we began looking at Infrastructure. 
+    Devops manage Infrastructure as part of thier task. 
+  Infrastructure Management :
+     AWS FOCUS
+     GCP
+  In our projects we are managing our resouces in AWS. 
+    How do we manage our cloud Infrastructure. 
+  
+   we can manage our resources using :
+  CLI 
+  GUI
+
+  AWS  is a public cloud. 
+
+  REGIONS 
+    ZONES : 
+  We can create our Infrastructure in AZ
+    when we create an ec2 server, the server would then create and EBS volume 
+    when we create an ec2 instance, it comes along with an EBS.
+    each ec2 server needs a root file system which is an EBS   volume:
+
+      AZ1 
+      we can have multiple EBS  volume attached to our ec2 server. 
+
+      ROOT VOLUME:
+        How to attach the root ebs volume to another server 
+        ANS:
+          detach it and retattach  to another server. 
+          EBS  storage cant be shared with diverse servers at once. 
+          the volume must be mounted. 
+          EBS VOLUME CONCEPT:
+            Adding an additional. 
+          1. Add new volume:
+               we can also choose to encripy our data/volume.
+               KMS: key management service 
+
+               verify the volume :
+                accessing the data/volume from your server :
+                  commands:
+How to mount volume:
+     our server came with a pieace of ebs volume 
+            to see all the volumes attached to our server run:
+     lsblk:
+      / indicates the volume is mounted 
+    got to your aws and create more storae:
+    to attach volume to another servers, all swervers must be in the same AZ.
+
+To attached a volume to server it must not b in use.
+
+command:
+  lsblk - to list the number of volume blocks we have 
+  only the mounted disk would contain our data/files
+
+  dh -h would diplay all the volumed that have been mounted. 
+
+  volume management.
+
+  first create a filesytem:
+    to add voume to a server we need to be root or have sudo access. 
+    lsblk:
+      mkdir and mount the file system to it 
+      sudo mount  [filesystem] data
+      mkdir  /data = root direcotory
+      sudo mkdir /datas
+         how to create mount point:
+
+          sudo file -s /dev/xvdf
+
+          sudo mkfs -t xfs /dev/xvdf
+          sudo mkdir /bmoapp
+          sudo mount /dev/xvdf/bmoapp
+           sudo umount /data
+   udomount -a
+  
+transfer files from your system to the server:
+  mv your key to documents. 
+
+  scp -i [keyname] [filename]  the server serverip   
+  change onwership of the file to  bvn
+
+
+  data migration: 
+    data migration could be as a result of version controls .
+
+    if we move the disk we would move the data as well. 
+    while ensuring zero downtime. 
+    to avoid downtime we can create a snapthop of the volume  while the serveris up and running. 
+    verion of ubuntu m.m 20
+
+    we can move data from a lover version ot a server to an upper version 
+    or between 
+    we can also migrate from az1 to az2
+    an ebs volume cant be mounted to serveral servers at once:
+      Data Receovery/Disaster recover : 
+        Migration is an operation that is well planned.
+
+        EFS:
+          Elastic file system:
+
+
+            we can create a volume from the snaptshop. 
+            and attach the volume to a different server:
+
+How to recover our private. 
+    RWO = ebs volume comes with  RWO
+
+we can use our ebs concept to revoer our private key. 
+a server comes with a private which is a perm key.
+
+
+CREATE NEW USER, CREATE THIER OWN PRIVATE KEY. 
+
+you would need the public key to access the server 
+
+chomod 400 simon.perm
+
+user ebs volume concept to recover the private key. 
+
+stop the server and recover the root volume 
+once its detashed , create a Receovery server 
+server key is missing. 
+
+Tell us your experience in EBS VOLUME CONCEPT:
+  used cases:
+    root volume for ec2 servers 
+    Additional volumes 
+    addition mountpoint to ec2 server 
+    data migration and backup 
+    automated the process using lifecyle policy
+    to recover private key. 
+our jenkins home directory is mounted on a seperate disk
+    persistent volume -   docker and k8s 
+
+EFS/NFS
+
+A scenario where we xan create a single mountpoint across multiple server. 
+efs is highly scalable and has no maxium capacity. 
+
+
+How install efs in our server . 
+create a nfs in your applicable vpc 
+ebs volume are limited within an AZ  while efs  can be spanned accross regions.
+
+
+
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-e4b35a9f.efs.us-east-2.amazonaws.com:/ efs
+open the NFS port in the securty group. 
+
+
+Creare a mountpoint in another 
+install nfs command 
+sudo apt install nfs com
+
+
+NFS/HOSTPATH:
+  .........................
+  /data/db
+
+NFS in k8s:
+
+
+  DEMO:
+
+
+.........................................
+           DEMO 
+    LINK:  https://www.linuxtechi.com/create-add-ebs-volume-aws-instance/
+    1. Create the volume in aws ec2.
+    2. attach the volume to an instance 
+    3. verify the blocks  by running :
+           lsblk
+            Mounting the newly created added EBS  volume
+    4. file -x /dev/xvdf
+
+    scp -r -i db.pem 23 ubuntu@13.52.247.129:/home/ubuntu/deploy.
+
+    
+    scp -r -i dem.pem finance  ubuntu@3.129.72.62:/home/ubuntu/bmoapp
+    
+     scp
+
+
+    scp -r -i dem.pem finance  ubuntu@
+    scp
+
+  changing onwership:
+     chown [user]:[user] [filename]
+     sudo chown elvis:elvis  finance.
+
+Transfering data to my maven webapp. finance volume. 
+
+scp -r -i April21.pem finace  ec2-user@254.193.51.34:/home/ec2-user/data
+...................................................
+connecting to masternode in k8s cluster 
+ssh -i mykey admin@ec2-34-237-1-127.compute-1.amazonaws.com
