@@ -1,0 +1,157 @@
+APRIL 17 2021:
+
+AWS 
+......................................
+AWS along side EKS 
+computer:
+
+	hardware
+	os
+	databases
+	applications 
+servers are super computer 
+we need a database ( volume)
+EBS =  elastic block store . 
+databses are installed . 
+in the past companies host thier own data centres 
+it can always be a problem to self manage on prem infrastructure. 
+infrastructure management  can be very complicated . 
+datacebtre 
+
+Cloud Engineers:
+infrastructure engineer:
+	>>>>>>>>>>>>>>>>>>>>
+  Create a Highly Available Infrstructre 
+  Maintaining infrastrue on prem is such a high cost. 
+  High Availability ensures that we can access our applications at any time 
+
+  ...............................
+  Fault tolerance 
+  Back up and restore 
+  Set up scalable Infrstructre
+Cloud Engineer:
+  AWS certfied engineer and not still hired.
+  ..........................
+  provision : 
+    configured and manage computers
+Resources  provisioned when we use kops: 
+  ebs, s3, elb,vps, networking. 
+  IAAS: client managed part of the infrastructure
+  ec2 = infrastructure. 
+  PAAS: client managed the applications and data. example is EKS, ECS,   
+  saas: Everything is managed by the cloud provider. example : gitub, lambda, sonatype nexus, 
+  Availability zones are isolated from each other.  
+  Engineered
+when u used eks: you can have a vpc, that can come with fouir 4 subnets.
+An AZ is a collection of one or more datacentres in an AZ
+High Availabity :
+  place resources in different AZ
+  And multi region concept. 
+  and levraging resources in aws cloud
+  EOSCALE:
+    How to choose the right region:
+      How have you been invlved in decision making. 
+      price : which region is cheaper
+      service Availabity: 
+        customers location:
+          customer locations:
+            Latency:
+              security and compliance and Requirements:
+    we can place our resources in areas where there is polical instability:
+
+      EC2  BASICS : 
+         elastic compute cloud. 
+         scalable computing capacity in the aws cloud. 
+         ....................
+         Security Groups. 
+         Elastic block starage : 
+          awsc is selling computing services.
+          ON demand options : create and terminate the instances at anytime 
+          Reserve Instances : purchase an instaces for a reserved period:
+           spot instances: 
+              servers that no one is using. 
+            ...............
+            AMI:
+              GolDEN  AMI:
+  After the Break:
+AMI:
+  Community versions ( includes most of the free tiears)
+  Marketplace 
+  My  IAM.  we can create our own image 
+  free tier only.
+
+Go to EC2 SERVICES : 
+  EBS VOLUMES : 
+
+Market place : 
+  splung is a substitute for elstics search , filbeat and kibana
+  IT Business management Applications
+
+Instance type : 
+  computer power
+
+Community Edition : 
+     Amazon linux2:
+Kind of Servers: 
+   would depend on applications and expectations  of work load.
+   Security acts as a virutal firewall that deptermines how traffic flows in and out of our instances 
+   Instaces comes with Private Ip addresses for communications with the VPC 
+   Elastic/static public IP address: 
+
+    connecting to an Instance: 
+      Host details
+      Git bash 
+      putty
+      ssh private key.pem/password. 
+      username : once u log in, you can add more users and assign password 
+      ubuntu: 
+Stoarage  class:
+  EBS = Elastic block store : root volume for our ecs instances. 
+  object storages.  
+    S3: SOTRAGES FOR ALL MOVIES.
+
+    Block starage needs to be formatted. 
+  16 TB of data. 
+  we can snatpshot ebs while it is running 
+  EBS  can only be backed at a particular Availabity zones:
+    s3 buckets can run independently of s3 buckets. 
+    the root volume of servers is ebs volumes : 
+ eba synapshot can be taken and attached to an exiting server
+ 
+ ..........................
+ EBS GENERAL PURPOSES : 
+  it comes with reliabilty and flexibilty:
+     s3:  simple storage services
+  when servers are installed it comes with a piece of storage
+  command
+  df /h
+  lsblk
+
+  ltech
+  2020
+
+
+  jum server: 
+    How do you ensure that only 
+    dont open traffic from everywhere 
+    open traffic from a specific source. 
+
+    in our group : 
+      promethues handles more of metrics 
+      elastic stack - logs/ log management and data analytic
+
+kubectl edit svc promethues-server -n monitoring.
+...........................
+use promethues as the datasource: 
+
+
+
+  IAM PRACTICE 
+
+  Username : Joyce
+  Dan4040
+  Dan4040
+
+  3.85.234.153 
+
+  Kops Master

@@ -1,0 +1,76 @@
+  Monitoring ;
+help us to prevent paniking when things go wrong. 
+
+Grafana and prometheus are both open software. 
+Grafana provides a visualization platfrom. 
+
+Installing prometheus:
+
+  prometheus m akes use of TSDB
+
+the different components of prometheus
+how prometheus is configured 
+  how can we use helm to configure prometheus to  monitor our entire application 
+  we have helm charts for prometheus:
+
+    helm search repo ( to search a repo)
+
+    if you want to get a specific information from a file , what option would u use : 
+      we can grep from prometheus. 
+      helm search repo stable | grep prometheus. 
+
+      helm show values  stable/prometheus > prometheus.values
+
+      RBAC : Roll back access control. 
+      service accounts provide an extra layer of security. 
+
+     helm install : 
+
+     -n  name space  
+
+     helm ls [name space]
+     helm ls  -n monitoring
+ 
+
+   Configuring graphna: 
+
+       knowing prometheus and graphna is crucial :
+        searcing in a large file : 
+
+
+          /pase the key word: 
+            discussing grapha  and prometheus:
+              grapha dashboards for k8s 
+
+
+              elastic search 
+               kebana 
+          kubernates security:
+            
+
+
+     31937
+     31287
+
+
+haproxy configure
+
+
+frontend haproxynode
+    bind *:80
+    mode http
+    default_backend backendServers
+
+backend backendServers
+    balance roundrobin
+    option forwardfor
+    http-request set-header X-Forwarded-Port %[dst_port]
+    http-request add-header X-Forwarded-Proto https if { ssl_fc }
+    option httpchk HEAD / HTTP/1.1\r\nHost:localhost
+    server node1 172-20-41-129:32500 check
+    server node2 172-20-42-20:32500  check
+    server node3 172-20-62-41:32500  check 
+
+    .......................................
+    create ns  called monitoring 
+    kubectl get all -n monitoring

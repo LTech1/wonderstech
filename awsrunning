@@ -1,0 +1,100 @@
+
+DevOps  Engineering  = Continuous Improvement & 
+                      in automation IT Processes 
+
+                      Management skills 
+                      Leadership skills 
+                      Technical skills :
+                          Development 
+                            SDLC = ebay  
+                          Infrastructure 
+
+Technical skills : 
+  Computer Components
+     Hardware (Bare metal) = KEYBOARD, MONITOR=14INCHE ,  MOUSE, CPU
+                 RAM = 8GB, ROM=Hard Drive = 250GB  = 
+        AWS CLOUD = MILLIONS OF Computer
+        WINDOWS LAPTOP / DESKTOP 
+
+     Softwares = 1. Operating system 
+                      Windows 10, 8, 7, xp = 20%
+
+                      Linux = 80% 
+                      Red
+
+                 2. Packages = Microsoft office
+                            adobe reader 
+                            sublime text editor
+                            telegram  
+                            mobaXterm or puTTY 
+
+  
+
+Basic -- Advance 
+1. Linux OS and commands 
+2. Shell Scripting  
+3. Git and GitHub -PayPal | BOA | NIS
+4. Maven = Builds by Creating Packages 
+5. Tomcat / JBoss  / 
+6. Apache HTTP Server
+7. SonarQube = Complaince | Quality 
+8. Nexus = Backup 
+9. Jenkins = 
+     automation tool = Continuous
+10. Docker CREATE CONTAINERS FOR 
+      Packages  
+11. Docker SWARM manages/orchestrates 
+      containerised appliccation  
+12. Kubernetes 
+13. AWS = 75% and GCP 25% = 15X   
+        Udemy
+        google
+14. Terraform
+15. ANSIBLE
+16.   New Relic
+17.   Prometheus
+18.   EFK 
+19. Databses 
+20. Python 
+
+
+=======================
+PayPal   = Client 
+========================
+Computers = 
+Operating system - OS:
+   80% Linux OS
+   20% Windows OS
+       Solaris OS
+   ''
+  Ownership of data center
+  Rent computing services  
+
+We are leveraging computing serviceS from AWS and GCP
+ Linux OS = 
+   Is an Open source OS = Free + code 
+
+ Linus was a student who converted a problem to a business
+   
+ Solaris wasn't an open source = paid for 
+
+ Create a free Account in AWS =  
+
+    https://aws.amazon.com/ 
+
+  CONNECTING TO LINUX SERVER IN AWS: 
+      Public IP = 54.235.43.182
+      key or password = key21z.pem
+      userName = ec2-user  
+          = default user
+      ssh-client Software 
+         mobaXterm or puTTY 
+
+ssh -i "key21z.pem" ec2-user@54.235.43.182
+
+
+
+
+
+
+

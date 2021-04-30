@@ -1,0 +1,63 @@
+Prometheus deployment. 
+
+values file configurations: 
+	change line 316 to NodePort Service
+	configure Prometheus server. 
+line 574: Prometheus server
+ Line 929: change service type to NodePort Service
+ line 1149 : alert manager. 
+ in alert manager we can decide where alerts should be sent.
+ 1170 server files:
+ 	changing all the information under alert manager:
+
+from line 1152 to 1169:
+	Serverfiles and alert manager files: 
+line 532: 
+Line 918:
+ Service "prometheus-node-exporter" is invalid: spec.clusterIP: Invalid value: "None": may not be set to 'None' for NodePort services
+
+ .........................................
+ Username:  Joyce-at-545475907332
+ password:  OnuvDMeAu1/FyIy4OZozM9SZY5L04z4IORxPGQuhMFM=
+
+ push the codes to the codecommit master brance.
+ files pusheed :
+ 	scripts
+ 	appspecs
+ 	buildspecs
+ 	codedepoly
+ 	index.html.
+ Branching:
+ 	master is the main branch. 
+
+ 	Branches comes in
+
+ 	branch is a way to divert from the master branch. 
+ 	 git check -b my-feature 
+ 	 git commit 
+ 	 git push  --set-upstream origin my-feature
+Merging the changges:
+	merging the  the other branch to the master branch
+
+	Master is the workigng version of our code. 
+	its best practice to use brnaches. 
+	we can limit pushes to the 
+	only senior developers can push to master.
+
+	information
+	junio
+
+	create a deny policy.
+	for specific group of developers. deny them access to pushing to master brancher.
+	they must create a pull request for senior dev. 
+	..............................
+	notifcation rule
+	settings
+	choose trigger notifications
+	code commit notification service.
+	triggers:
+		triggers are different from notification.
+		push to existing branch
+Codecomit has 
+
+create a rule .. match repository.		
