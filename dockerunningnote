@@ -1,0 +1,803 @@
+What is Docker?                :
+====================
+Docker is a software use to create docker images and run containerized  apps. 
+
+Docker is used by Developers, Administrator and others to build 
+    and run applications as containers.
+
+Docker Editions:
+    Docker CE --> Comunity Edition --> Open Source(Free)
+    Docker EE --> Enterprise Edition --> Commercial
+
+Type: Containerization
+Vendor: Docker INC
+
+O.S --> Cross Platform(Docker can be installed in any O.S)
+
+    Docker Can Be Installed in Linux, Windows OS, mac OS  
+
+Docker CE Can be installed in Most of the linux except redhat.
+
+Docker EE can installed in all O.S including redhat.
+
+Docker CE --> OpenSouce Free
+
+Docker EE --> Commerical :
+   DTR --> Docker Trusted Registry(Private Repo to main docker images)
+   UCP --> Universal Control Plane --> It's GUI for managing Docker Machines
+
+Containerzation Platforms/Softwares.     :
+    Docker,  = 80%
+    CoreOS,
+    Rocket --> 
+
+Dockerfile     --> It's a file used to create docker images.
+
+Docker Image  It's a package which contains
+    application Code e.g ebay.war 
+       and
+    It's dependencies(Softwares, ENV Vars ..etc)
+                     
+Docker Container--> It's runtime instance of docker image
+                    where our application is running.
+     The standard unit where the application service is deployed or running.
+
+
+DockerRepo/Registry. --> We can store and share the docker images.   
+
+    Public Repo --> Docker hub is It is generally a public repo. 
+                Which contains all the open source softwares as 
+        a docker images. We can think of docker hub as play store for docker images.
+
+
+    Private Repo(Nexus,JFrog,D.T.R(Docker Trusted Registory)) --> 
+            We can store and share the docker images with in our company
+        network using private repo
+        
+ PaaS  = 
+ IaaS  = EC2
+ SaaS  = DockerHub, New Relic, GitHub, 
+
+Docker Enigine/Daemon/Host --> It's a software or program using which we can 
+                               create images & RUN contianers.
+
+Docker is cross platform.
+
+Docker CE
+   Docker CE will not be supported by Redhat.
+   
+   
+
+Docker EE
+  Docker EE will be support most of the os including redhat.
+
+      
+First Create Account in docker hub
+https://hub.docker.com
+
+What is docker hub?
+It's a public repository for docker images. You can think as play store for
+docker images.
+
+Install Docker on AWS Ubuntu
+############################
+#!/bin/bash
+sudo apt update -y 
+sudo apt install docker.io -y
+sudo usermod -aG docker ubuntu 
+
+NB: apt and apt-get are package managers for ubuntu servers 
+sudo docker info
+
+ssh -i "key23.pem" ubuntu@ec2-18-222-184-232.us-east-2.compute.amazonaws.com  
+
+https://github.com/LandmakTechnology/maven-web-app/blob/master/ansible-setup
+
+# Check docker is installed or not
+   docker info
+
+# You will get permison denied error as regular user 
+    dosn't have permisions to execute docker commands.Add user to docker group.
+
+sudo usermod -aG docker $USER 
+or 
+sudo usermod -aG docker ubuntu
+
+sudo usermod -aG docker simon
+
+# Exit From Current SSH Terminal & SSH(Login) again.Then execute 
+docker ps
+
+Install Docker on AWS RHEL
+############################
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install docker-ce-3:18.09.1-3.el7 -y
+sudo systemctl enable docker
+sudo systemctl start docker
+
+
+sudo docker info
+adduser simon
+
+# Check docker is installed or not
+docker info
+
+# You will get permison denied error as regular user dosn't have permisions to execute docker commands.Add user to docker group.
+
+sudo usermod -aG docker $simon 
+sudo usermod -aG docker ec2-user
+
+# Exit From Current SSH Terminal & SSH(Login) again .Then execute 
+docker ps
+
+# Amazon Linux 2
+================
+sudo yum update -y		
+sudo yum install docker -y
+sudo systemctl start docker
+
+Add Regural user to dockergroup
+sudo usermod -aG docker  <username>
+
+ex:
+sudo usermod -aG docker ec2-user
+
+Once you add user to group exit from the server and login again.
+# Get docker information
+docker info
+
+#Install Docker in Linux (Works for most of linux flavors).
+sudo curl -fsSL get.docker.com | /bin/bash
+
+
+Docker Home/Working Dir: 
+/var/lib/docker
+
+Dockerfile   --> It's file which will have instructions to create docker image.
+# Sample DockerFile Content
+
+FROM tomcat:8-jdk8-corretto
+COPY target/*.war /usr/local/tomcat/webapps/myapps.war
+
+FROM tomcat:9.0.40-jdk8
+# Dummy text to test 
+COPY target/myapps.war /usr/local/tomcat/webapps/myapps.war
+
+docker run --name myapps -d -p 8080:8080 myapp:1  
+
+http://18.212.175.83:8080/maven-web-app/
+
+docker create 
+
+Docker Image -->  	It's a pacakage which will have all application code and 
+                    required softwares 
+                    plus configurations 
+                    for your application to deploy.
+
+
+hostname dockerhost
+
+Image Commands:
+
+# List Images
+
+docker images
+
+
+
+docker image ls
+
+# Will return only ids.
+docker images -q
+docker rmi -f $(docker images -q)
+
+# Sample DockerFile Content
+
+FROM tomcat:9.0.37-jdk8-corretto
+COPY target/*.war /usr/local/tomcat/webapps/maven-web-app.war
+
+# Build Image
+Docker file with Default Name: Dockerfile
+    docker build -t <imageName> .
+    docker build -t myimage .
+    
+    docker build -t wfapp /home/ubuntu/myapp/Dockerfile
+    
+    docker push mylandmarktech/wfapp:tagname 
+    
+    docker push mylandmarktech/myapp:7
+
+Create a tag and login
+
+    docker tag wfapp:11 mylandmarktech/myapp:7 
+    
+    
+    
+If you have docker file with a custom name then:
+    docker build -t <imageName> -f <fileName> # while building docker image.
+    
+    docker build -f DockerfileMaven -t myimage
+    
+    docker run --name containerName -d -p serverPort:containerPort imageName
+    
+    docker run --name myapp -d -p 8080:8080 myimage:latest
+    
+    docker ps
+    
+    docker ps -a
+
+Note: Image name should have repository details along with name and version.
+
+Public Repo (Docker Hub)
+
+docker build -t <dockerhubusername>/<AppName>:<version> .
+
+Note: If we don't mention version information. 
+        By defualt it will use 'latest' as version
+
+ex:
+    docker build -t mylandmarktech/maven-web-app .     :
+
+Private Repo (Nexus/JFrog/DTR)
+
+docker build -t <imageName> .
+
+docker build -t <IP/HostNameOfRepo>:<RepoPort>/<appName>:<version> .
+
+ex:
+docker build -t 178.90.34.12:8083/maven-web-application .
+
+Authenticate with repo
+
+# Public Repo
+docker login -u <userName> -p <password>
+ex:
+docker login -u mylandmarktech/maven-web-app -p password
+
+
+Priavate Repo
+docker login -u <username> -p <password>  <URL>
+ex:
+docker login -u admin -p admin123 178.90.34.12:8083
+
+
+Push Docker Image to Repo
+docker push <imageName>
+
+Public Repo
+docker push mylandmarktech/maven-web-app
+
+Private Repo
+docker push 178.90.34.12:8083/maven-web-application
+
+# Downlod Image from repo
+docker pull <imageName>
+
+Public Repo
+docker pull mylandmarktech/web-application
+
+Private Repo
+ docker pull 178.90.34.12:8083/maven-web-application
+ docker run -d -p 9900:80 --name hello1 tutum/hello-world
+ docker rmi -f $(docker images -q)
+ 
+
+docker run -d -p 8080:8080 
+
+http://18.212.175.83:8000/myapp/ 
+ 
+ 
+ Inspect Docker Image
+==================
+docker image inspect <imageId/Name>
+
+How to list only layers of an image?
+docker history <imageId/Name>
+
+Delete Image
+
+docker rmi <imageId/Namdocker rmie>
+
+docker rmi -f <imageId/Name>
+
+docker ps = List running containers 
+docker ps -a = All containershistory 
+
+docker images = list all docker images
+
+Note: We can't remove images if container are running  from the image.
+      We can't force delete images if there is running container.
+
+If container is in stopped(exited) state we can force delete image for the stopped container.
+
+what is dangling images in docker?
+The image which doesn't have repository mapping or tag.
+
+How to delete all the images?
+docker rmi -f imageId imageId imageId
+
+docker rmi -f $(docker images -q)
+
+docker system prune 
+Will delete all stopped containers, unused docker networks and dangling images.
+An image that is not tagged to any repo is call Dangling images.
+
+docker image prune
+
+Will delete angling images.
+
+We can tag image with repo.
+
+docker tag <imageName/ID>  <imageName>
+
+What is working directory of docker?
+/var/lib/docker
+
+
+How can we move/copy images from one server to another server without repo?
+
+In Source Server(where you have image)
+# It save image(All the layers) as a tar file
+
+docker save -o <fileName>.tar <imageName/Id>
+
+
+Then SCP tar file from Source Server to Destination Server
+
+# In destination server
+docker load -i <fileName>.tar
+
+
+List Dangling images
+
+docker images -f dangling=true
+
+Remove Dangling Images
+docker rmi $(docker images -f dangling=true -q)
+
+
+docker system prune 
+
+This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+
+docker image prune
+This will remove:
+- all dangling images
+
+docker contianer prune
+This will remove:
+  - all stopped containers
+
+docker network prune
+This will remove:
+  - all networks not be used by at least one container
+
+Container Commands:
+===================
+How to create a contianer?
+
+docker run or docker create
+
+docker create --name <containerName> -p <hostPort>:<containerPort> <imageName>
+
+docker run --name <containerName> -p <hostPort>:<containerPort> <imageName>
+
+# Create a container in dettached mode
+docker run -d --name <containerName> -p <hostPort>:<containerPort> <imageName>
+
+what is the difference b/w docker run and docker create?  :
+
+docker create will only create a container but it will not start the container.
+docker run will create a container and start the container.
+
+what is port publish or port mapping in docker ?
+    If We have to access application which is running as container from outside of docker 
+    we can't access using continerIP & ContainerPort. 
+    We can publish contianer port using host port using -p or --publish.
+    So that we can access using HostIP(docker server IP) and Host Port from outside docker.
+
+
+docker run -d -p 8080:8080 --name mavenwebapp  mylandmarktech/maven-web-app:v6
+
+Access Application which is running Using  Docker Server IP & Host Port.
+
+http://<DOCKERSERVERPUBLICIP>:<HOSTPORT>/maven-web-application
+
+
+# How to create container in interactive mode?
+
+docker run -it --name <nameofthecontainer>  <image>
+
+List Running Containers
+=======================
+
+docker ps 
+docker container ls
+
+List All Containers
+==================
+
+docker ps -a
+
+docker container ls -a
+
+List only running container ids
+==============================
+
+docker ps -q
+
+docker container ls -q
+
+
+List all container ids
+==============================
+
+docker ps -aq
+
+docker container ls -aq
+
+
+Start the container
+===================
+docker start <containerId/Name>
+
+
+Restart Container
+
+docker restart <containerId/Name>
+
+Stop Container
+
+docker stop <containerId/Name>
+
+Kill container
+
+docker kill <containerId/Name>
+
+What is the difference b/w docker stop & docker kill?
+
+docker stop will first send SIGTERM then SIGKILL it will kill process with grace period. 
+Docker kill send SIGKILL it will kill process with out any grace period.
+
+Can we have/run more than one process in a container?
+
+Yes Can we have. But it's not suggestable. 
+
+
+Pause contaier process.
+
+docker pause <containerId/Name>
+
+docker unpuase <containerId/Name>
+
+Inspect container
+docker inspect <containerId/Name>
+docker container inspect <containerId/Name>
+
+
+It will  container if it is stopped.
+docker rm  <containerId/Name>
+
+Force Remove If container is runing we can force remove
+docker rm -f <containerId/Name>
+
+
+How to delete only stopped containers
+
+docker rm $(docker ps -aq --filter  status="exited")
+
+How to delete all containers
+docker rm -f $(docker ps -aq)
+
+How to trouble shoot or debug applications running as a container?
+
+docker logs <containerId/Name> 
+
+docker logs mycan | grep errors  
+
+docker logs --tail <NoOflines> <containerId/Name>
+docker logs --tail 10 mycan | grep errors
+
+Docker Container --> It's runtime instance of a docker image where application will be running.
+
+What is Docker ? = Containerization software 
+
+Docker commands   :
+
+docker top  RAM 256MB ROM 1GB
+docker stats 
+docker exec mycon pwd && ls && 
+docker attach 
+
+DockerFile: 
+
+
+
+How to you trouble shoot or debug application which is running as a container?
+docker inspect 
+docker logs <containerId/Name>
+docker logs --tail <NoOflines> <containerId/Name>
+
+# It will display process details which is runing inside a container.
+docker top <containerId/Name>
+
+# It will display resource(RAM,CPU) consumtion details.
+docker stats <containerId/Name>
+
+# Execute commands on a runinging container.
+docker exec <containerId/Name> <cmd>
+
+ex:
+docker exec javawebapp ls
+docker exec javawebapp pwd
+
+How to go inside a container?
+
+docker exec -it <containerId/Name> /bin/bash
+ 
+       or
+
+docker exec -it <containerId/Name> /bin/sh
+
+# Docker attach will attach container process or shell to host server
+docker attach <containerId/Name>
+
+If we have to come out with out stoping the process cntl p+q.
+
+How to copy files from container to host system or host system to container?
+
+docker cp
+
+Container to the system
+
+docker cp <containerName>:</pathOftheContainerFile>  <SystemPath>/<fileName>
+
+ docker cp myappcon: 
+
+
+
+docker cp javawebappone:/usr/local/tomcat/logs/catalina.2020-04-23.log  javawebappone.log
+
+system to the Container 
+
+docker cp  <SystemPath>/<fileName><containerName>:</pathOftheContainerFile> 
+
+docker cp  /home/ubunut/test.log javawebappone:/usr/local/tomcat/logs/test.log
+
+
+What is docker commit?
+
+Using docker commit we can create image from the continer which will include changes.
+
+docker commit <containerId/Name> <imageName>
+
+docker commit myappcon conimage
+
+what is difference b/w COPY and docker cp?
+  cp = copy files and directories from docker-host to container and vice versa
+  COPY is a keyword in the docker file use to copy files into the image at creation.
+  
+
+How can we troubleshoot or debug issues in a docker container?   :
+  docker top <cName/cID>
+  docker logs
+  docker stats
+  docker exec
+  docker exec -it cName /bin/sh  : to access a particular container. 
+  docker attach 
+  
+
+How many containers can we create in 1 server?           :
+     386GB RAM
+     192vCPUs
+     30TB
+
+200
+  
+
+Can we set CPU,RAM limit for the containers while creating?
+Yes We set using options while creating a container.
+
+
+docker search <imageName>
+
+docker search tomcat
+
+
+FROM jboss/wildfly
+COPY target/*.war /opt/jboss/wildfly/standalone/deployments/
+
+
+Dockerfile --> It's file which contains instructions to create an image quickly. 
+               Docker Daemon  will process these instruction from top to bottom.
+
+
+EX:
+
+FROM tomcat:8.0.20-jre8
+
+COPY target/java-web-app*.war /usr/local/tomcat/webapps/java-web-app.war
+
+Dockerfile ---> 
+              List instructions needed to dockerise an application
+              Docker images are created from DockerFile
+              Docker images comprises of:
+                  application codes  = app.war
+                  +
+                  softwares and dependencies
+                  
+ Dockerfile Keywords:
+======================
+FROM: --> It is our base image expected to contain softwares and dependencies  
+
+FROM: tomcat:9.0.40-jdk8  
+
+MAINTAINER:   --> Author's details 
+
+MAINTAINER: LandmakTechnology 
+
+COPY: --> This will copy files from the docker-host to the container
+          when creating a docker image
+
+COPY: index.html /var/www/html/
+
+COPY:  . .
+
+COPY: <source> <dest>
+
+COPY vs cp = 
+
+ADD: This will copy files from the docker-host to the container
+          when creating a docker image
+     
+     It can copy files from external sources like url 
+
+ADD  https://github.com/LandmakTechnology/k8s-ansible   /usr/local/tomcat/
+
+ADD: <source> <dest>
+
+ADD <URL> <dest>
+
+COPY target/*.war /usr/local/tomcat/webapps/java-web-app.war
+
+ADD target/*.war /usr/local/tomcat/webapps/java-web-app.war
+
+RUN --> This will execute commands when creating a docker image 
+
+RUN    mkdir -pv /opt/app  
+
+RUN    touch /opt/app/test.java  
+
+RUN    tar -xvzf /opt/app/tomcat-8.tar.gz
+
+CMD --> This will execute commands when creating a docker container
+        It will execute the last  CMD listed on the DockerFile
+
+docker run/create    ==   CMD 
+
+docker build         ==   RUN 
+
+
+ENTRYPOINT --> his will execute commands when creating a docker container
+        
+IQ: What is the difference between CMD and ENTRYPOINT?
+     We can overwrite CMD but not ENTRYPOINT
+
+
+ docker ps -a
+ docker swarm 
+ docker stack 
+ docker service 
+ replica mode
+# DockerFile
+FROM ubuntu
+COPY . .
+RUN mkdir docker-laps
+#CMD ["ls"]
+
+ENTRYPOINT ["whoami"]
+
+docker build -t image1 .
+
+docker build -t image2 -f Dockerfile_ENT .
+
+docker run image2
+
+FROM ubuntu
+
+ENTRYPOINT ["ls", "/"]    
+
+ENTRYPOINT ["java","-jar","app.jar"]
+
+ENTRYPOINT  java -jar app.jar 
+
+CMD java -jar app.jar 
+
+CMD  ["start"] 
+
+ENTRYPOINT ["sh","catalina.sh"]
+
+ 
+    shell form --> with shell form application runs as a child process 
+                    It can be killed unnoticed
+        sh catalina.sh
+        
+    executable form in docker
+          application runs as a parent process
+          It cannot be killed unnoticed
+    
+   
+ 
+
+CMD ["echo" ,"FROM DockerFile"]
+
+# Dockerfile
+FROM ubuntu
+CMD ["ls", "/"]
+CMD ["echo" ,"FROM DockerFile"]
+
+# Dockerfile2
+FROM ubuntu
+COPY . .
+RUN mkdir dockerlaps
+CMD ["echo" ,"FROM DockerFile"]
+
+# Dockerfile2
+FROM ubuntu
+COPY . .
+RUN mkdir dockerlaps
+CMD ["ls"]
+
+
+CMD ["sh" ,"catalina.sh"]
+
+/opt/tomcat9/bin/
+    startup.sh
+    catalina.sh
+    
+
+FROM tomcat:9.0.37-jdk8
+COPY target/*.war /usr/local/tomcat/webapps/maven-web-app.war
+
+CMD ["sh" ,"catalina.sh"]
+
+
+WORKDIR --> Use to set the working directory of our image/container
+            cd 
+
+WORKDIR  /usr/local/tomcat/
+
+EXPOSE 8080 
+  
+  #docker run -d -p 700:8000   
+      
+
+ENV --> USE TO SET ENVIRONMENTAL VARIABLES FOR image/container
+
+ENV  <key> <value>
+
+      host: ${MONGO_DB_HOSTNAME}
+      port: ${portNumber}
+      username: ${MONGO_DB_USERNAME}
+      password: ${MONGO_DB_PASSWORD}
+
+ENV CATALINA_HOME /usr/local/tomcat
+
+LABEL branch dev
+
+ARG Use to passed vaiables in a Dockerfile
+
+ARG Hostname ${MONGO_DB_HOSTNAME}
+
+ARG branchName $branchName
+
+docker build -t imageName --build-arg branchName=dev
+
+
+
+
+
+
